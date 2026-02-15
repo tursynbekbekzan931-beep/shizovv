@@ -1,0 +1,31 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install MAUI Workload
+      run: dotnet workload install maui-ios
+
+    - name: Publish iOS App (Unsigned)
+      # Мы собираем без подписи, чтобы ты мог подписать сам через Sideloadly
+      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
+
+    - name: Upload IPA Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: HexStressApp
+        path: bin/Release/net8.0-ios/ios-arm64/publish/*.ipa

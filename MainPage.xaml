@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HexStressUI.MainPage"
+             BackgroundColor="#050505">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Header -->
+            <Label Text="HEXFLOOD PANEL" 
+                   TextColor="#00FF7F"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Layer Switcher -->
+            <Border Stroke="#333" StrokeThickness="1" BackgroundColor="#111" Padding="0" HorizontalOptions="Center">
+                <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                <Grid ColumnDefinitions="*,*">
+                    <Button Text="Layer 4" BackgroundColor="#222" TextColor="White" CornerRadius="0" Grid.Column="0"/>
+                    <Button Text="Layer 7" BackgroundColor="#00FF7F" TextColor="Black" FontAttributes="Bold" CornerRadius="0" Grid.Column="1"/>
+                </Grid>
+            </Border>
+
+            <!-- Target Field -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Target IP / Host" TextColor="Gray" FontSize="12"/>
+                <Border Stroke="#333" BackgroundColor="#151515" HeightRequest="50" Padding="10,0">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                    <Entry Placeholder="127.0.0.1" PlaceholderColor="#444" TextColor="White" VerticalOptions="Center"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Port Field -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Port (1-65535)" TextColor="Gray" FontSize="12"/>
+                <Border Stroke="#333" BackgroundColor="#151515" HeightRequest="50" Padding="10,0">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                    <Entry Placeholder="80" Keyboard="Numeric" PlaceholderColor="#444" TextColor="White" VerticalOptions="Center"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Method Selection -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Attack Method" TextColor="Gray" FontSize="12"/>
+                <Border Stroke="#333" BackgroundColor="#151515" HeightRequest="50" Padding="10,0">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8"/></Border.StrokeShape>
+                    <Picker Title="Select Method" TextColor="White" TitleColor="Gray" VerticalOptions="Center">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>HEXFLOOD | RAW</x:String>
+                                <x:String>UDP-BYPASS | GAME</x:String>
+                                <x:String>TCP-STOMP | V3</x:String>
+                                <x:String>OVH-DROP | BYPASS</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Concurrents Slider (Max 5) -->
+            <VerticalStackLayout Spacing="5">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Text="Concurrents" TextColor="Gray" FontSize="12"/>
+                    <Label Text="{Binding Source={x:Reference ConSlider}, Path=Value, StringFormat='{0:F0}'}" 
+                           TextColor="#00FF7F" FontAttributes="Bold"/>
+                </Grid>
+                <Slider x:Name="ConSlider" 
+                        Minimum="1" 
+                        Maximum="5" 
+                        Value="1"
+                        MinimumTrackColor="#00FF7F"
+                        ThumbColor="White"
+                        MaximumTrackColor="#333"/>
+            </VerticalStackLayout>
+
+            <!-- Start Button -->
+            <Button Text="LAUNCH ATTACK" 
+                    BackgroundColor="#D32F2F"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    CornerRadius="10"
+                    HeightRequest="55"
+                    Margin="0,20,0,0"
+                    Clicked="OnCounterClicked"/>
+
+            <Label Text="Status: IDLE" TextColor="#444" HorizontalOptions="Center" FontSize="10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
