@@ -15,8 +15,8 @@ jobs:
     - name: Install MAUI Workload
       run: dotnet workload install maui-ios
     - name: Publish iOS App (Unsigned)
-      # Добавлен флаг EnableCodeSigning=false для полного отключения подписи
-      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:EnableCodeSigning=false -p:CodesignKey="" -p:CodesignProvision=""
+      # Добавлен флаг -p:MtouchLink=None
+      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:EnableCodeSigning=false -p:CodesignKey="" -p:CodesignProvision="" -p:MtouchLink=None
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:

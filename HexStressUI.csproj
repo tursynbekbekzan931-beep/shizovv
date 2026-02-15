@@ -9,9 +9,11 @@
 		<Nullable>enable</Nullable>
 		
 		<ApplicationId>com.companyname.hexstressui</ApplicationId>
-
-		<!-- ЯВНО УКАЗЫВАЕМ ВЕРСИЮ IOS, ЧТОБЫ УБРАТЬ ПРЕДУПРЕЖДЕНИЕ -->
 		<SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
+
+		<!-- ЭТИ СТРОКИ ОТКЛЮЧАЮТ ОПТИМИЗАЦИЮ, КОТОРАЯ ВЫЗЫВАЕТ ОШИБКУ -->
+		<PublishTrimmed>false</PublishTrimmed>
+		<MtouchLink>None</MtouchLink>
 
 		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
 	</PropertyGroup>
