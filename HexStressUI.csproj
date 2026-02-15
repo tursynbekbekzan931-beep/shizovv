@@ -11,9 +11,9 @@
 		<ApplicationId>com.companyname.hexstressui</ApplicationId>
 		<SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
 
-		<!-- ПРАВИЛЬНАЯ КОМБИНАЦИЯ ДЛЯ ОБХОДА ОШИБКИ SDK -->
+		<!-- ИЗМЕНЯЕМ ЭТИ СТРОКИ ДЛЯ СОВМЕСТИМОСТИ -->
 		<PublishTrimmed>true</PublishTrimmed>
-		<MtouchLink>None</MtouchLink>
+		<MtouchLink>SdkOnly</MtouchLink>
 
 		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
 	</PropertyGroup>
