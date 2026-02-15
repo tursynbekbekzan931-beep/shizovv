@@ -7,25 +7,25 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15 # Используем самый новый мак
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x # СТАВИМ ВЕРСИЮ 9
 
     - name: Install MAUI Workload
       run: dotnet workload install maui-ios
 
     - name: Publish iOS App (Unsigned)
-      # Мы собираем без подписи, чтобы ты мог подписать сам через Sideloadly
-      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
+      # В команде тоже меняем net8.0-ios на net9.0-ios
+      run: dotnet publish -f net9.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
 
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:
         name: HexStressApp
-        path: bin/Release/net8.0-ios/ios-arm64/publish/*.ipa
+        path: bin/Release/net9.0-ios/ios-arm64/publish/*.ipa
