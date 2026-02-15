@@ -7,25 +7,27 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15
+    # Используем macos-14, он идеально совместим с .NET 8
+    runs-on: macos-14
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup .NET 9
+    - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        # Указываем, что хотим именно .NET 8 SDK
+        dotnet-version: 8.0.x
 
     - name: Install MAUI Workload
       run: dotnet workload install maui-ios
 
     - name: Publish iOS App (Unsigned)
-      # Добавлен флаг -p:_SuppressSdkVersionCheck=true чтобы игнорировать ошибку Xcode
-      run: dotnet publish -f net9.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision="" -p:_SuppressSdkVersionCheck=true
+      # Возвращаем команду для net8.0-ios
+      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
 
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:
         name: HexStressApp
-        path: bin/Release/net9.0-ios/ios-arm64/publish/*.ipa
+        path: bin/Release/net8.0-ios/ios-arm64/publish/*.ipa
