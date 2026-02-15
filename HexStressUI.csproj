@@ -8,10 +8,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		
-		<ApplicationId>com.companyname.hexstressui</ApplicationId>
-		<SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
+		<ApplicationId>com.shizov.panicpanel</ApplicationId>
+		<SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
 
-		<!-- ИЗМЕНЯЕМ ЭТИ СТРОКИ ДЛЯ СОВМЕСТИМОСТИ -->
 		<PublishTrimmed>true</PublishTrimmed>
 		<MtouchLink>SdkOnly</MtouchLink>
 
