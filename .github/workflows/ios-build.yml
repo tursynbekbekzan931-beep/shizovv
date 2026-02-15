@@ -1,31 +1,22 @@
 name: Build iOS App
-
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-
 jobs:
   build:
-    # Используем macos-14, он идеально совместим с .NET 8
     runs-on: macos-14
-
     steps:
     - uses: actions/checkout@v4
-
     - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
-        # Указываем, что хотим именно .NET 8 SDK
         dotnet-version: 8.0.x
-
     - name: Install MAUI Workload
       run: dotnet workload install maui-ios
-
     - name: Publish iOS App (Unsigned)
-      # Возвращаем команду для net8.0-ios
-      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
-
+      # Добавлен флаг EnableCodeSigning=false для полного отключения подписи
+      run: dotnet publish -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:EnableCodeSigning=false -p:CodesignKey="" -p:CodesignProvision=""
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
       with:
