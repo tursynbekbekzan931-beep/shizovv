@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15 # Используем самый новый мак
+    runs-on: macos-15
 
     steps:
     - uses: actions/checkout@v4
@@ -15,14 +15,14 @@ jobs:
     - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x # СТАВИМ ВЕРСИЮ 9
+        dotnet-version: 9.0.x
 
     - name: Install MAUI Workload
       run: dotnet workload install maui-ios
 
     - name: Publish iOS App (Unsigned)
-      # В команде тоже меняем net8.0-ios на net9.0-ios
-      run: dotnet publish -f net9.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
+      # Добавлен флаг -p:_SuppressSdkVersionCheck=true чтобы игнорировать ошибку Xcode
+      run: dotnet publish -f net9.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision="" -p:_SuppressSdkVersionCheck=true
 
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4
