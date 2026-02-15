@@ -11,8 +11,8 @@
 		<ApplicationId>com.companyname.hexstressui</ApplicationId>
 		<SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
 
-		<!-- ЭТИ СТРОКИ ОТКЛЮЧАЮТ ОПТИМИЗАЦИЮ, КОТОРАЯ ВЫЗЫВАЕТ ОШИБКУ -->
-		<PublishTrimmed>false</PublishTrimmed>
+		<!-- ПРАВИЛЬНАЯ КОМБИНАЦИЯ ДЛЯ ОБХОДА ОШИБКИ SDK -->
+		<PublishTrimmed>true</PublishTrimmed>
 		<MtouchLink>None</MtouchLink>
 
 		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
